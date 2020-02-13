@@ -30,7 +30,7 @@ pipelines:
           inputSteps:
             - name: docker_push
           outputResources:
-            - name: build_info_1_docker_build_push
+            - name: build_info_docker_build_push
             
             
             
