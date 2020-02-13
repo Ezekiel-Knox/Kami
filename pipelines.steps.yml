@@ -44,9 +44,12 @@ pipelines:
         configuration: 
           inputResources: 
             - 
-              name: build_info_docker_build_push
+              name: docker_push
               trigger: false
           waitUntilFinish: true
+          inputSteps: 
+            - 
+              name: docker_push
         execution: 
           onCancel: 
             - "echo \"Someone cancelled the job\""
