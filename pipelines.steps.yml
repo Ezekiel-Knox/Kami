@@ -32,9 +32,7 @@ pipelines:
           outputResources:
             - name: build_info_docker_build_push
             
-pipelines:
-  - name:   docker_build_pipeline
-    steps:
+
       - name: scan
         type: XrayScan
         configuration:
