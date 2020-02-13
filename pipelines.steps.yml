@@ -10,7 +10,7 @@ pipelines:
           dockerImageName: 'docker.art.local/alpine37'
           dockerImageTag: ${run_number}
           inputResources:
-            - name: gitto
+            - name: repo_docker_build_push
           integrations:
             - name: artimus
  
@@ -41,7 +41,7 @@ pipelines:
           waitUntilFinish:         true  # default true
  
           inputResources:
-            - name: build_info_1_docker_build_push         # required
+            - name: build_info_docker_build_push         # required
               trigger: false
                     # optional
           inputSteps:
