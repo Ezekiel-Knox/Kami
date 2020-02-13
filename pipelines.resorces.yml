@@ -1,5 +1,5 @@
 resources:
-  - name: repo_docker_build_push
+  - name: repo_docker_build_push2
     type: GitRepo
     configuration:
       gitProvider: gitto                                     # replace with your integration
@@ -7,7 +7,7 @@ resources:
       branches:
         include: master
  
-  - name: build_info_docker_build_push
+  - name: build_info_docker_build_push2
     type: BuildInfo
     configuration:
       sourceArtifactory: artimus
