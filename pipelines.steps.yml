@@ -1,5 +1,5 @@
 pipelines:
-  - name: pipeline_docker_build_push
+  - name: pipeline_docker_build_push2
     steps:
       - name: docker_build
         type: DockerBuild
@@ -30,7 +30,7 @@ pipelines:
           inputSteps:
             - name: docker_push
           outputResources:
-            - name: build_info_docker_build_push
+            - name: build_info_docker_build_push2
             
             
             
@@ -41,7 +41,7 @@ pipelines:
           waitUntilFinish:         true  # default true
  
           inputResources:
-            - name: build_info_docker_build_push         # required
+            - name: build_info_docker_build_push2         # required
               trigger: false
                     # optional
           inputSteps:
