@@ -46,7 +46,7 @@ pipelines:
             - 
               name: build_info_docker_build_push
               trigger: false
-          waitUntilFinish: <boolean>
+          waitUntilFinish: true
         execution: 
           onCancel: 
             - "echo \"Someone cancelled the job\""
