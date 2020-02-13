@@ -10,7 +10,7 @@ pipelines:
           dockerImageName: 'docker.art.local/alpine37'
           dockerImageTag: ${run_number}
           inputResources:
-            - name: repo_docker_build_push
+            - name: repo_docker_build_push2
           integrations:
             - name: artimus
  
