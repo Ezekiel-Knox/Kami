@@ -49,7 +49,6 @@ pipelines:
         execution:
           onStart:
             - echo "Preparing for work..."
-          onStart:
             - echo "Prepping build environment"
           onSuccess:
             - echo "Job well done!"
