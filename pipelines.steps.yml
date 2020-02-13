@@ -51,7 +51,7 @@ pipelines:
           waitUntilFinish: true
           inputSteps: 
             - 
-              name: docker_push
+              name: publish_build_info
         execution: 
           onCancel: 
             - "echo \"Someone cancelled the job\""
