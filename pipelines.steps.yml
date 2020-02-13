@@ -1,57 +1,62 @@
-pipelines:
-  - name: docker_build_pipeline
-    steps:
-      - name: docker_build
-        type: DockerBuild
-        configuration:
-          affinityGroup: docker_afgroup             # Execute build and push on the same node
-          dockerFileLocation: .
+--- 
+pipelines: 
+  - 
+    name: docker_build_pipeline
+    steps: 
+      - 
+        configuration: 
+          affinityGroup: docker_afgroup
+          dockerFileLocation: "."
           dockerFileName: Dockerfile
           dockerImageName: docker.art.local/alpine37
           dockerImageTag: $run_number
-          inputResources:
-            - name: repo_docker_build_push
-          integrations:
-            - name: artimus
- 
-      - name: docker_push
-        type: DockerPush
-        configuration:
-          affinityGroup: docker_afgroup             # Execute build and push on the same node
+          inputResources: 
+            - 
+              name: repo_docker_build_push
+          integrations: 
+            - 
+              name: artimus
+        name: docker_build
+        type: DockerBuild
+      - 
+        configuration: 
+          affinityGroup: docker_afgroup
+          inputSteps: 
+            - 
+              name: docker_build
+          integrations: 
+            - 
+              name: artimus
           targetRepository: docker-local
-          integrations:
-            - name: artimus
-          inputSteps:
-            - name: docker_build
- 
-      - name: publish_build_info
+        name: docker_push
+        type: DockerPush
+      - 
+        configuration: 
+          inputSteps: 
+            - 
+              name: docker_push
+          outputResources: 
+            - 
+              name: build_info_docker_build_push
+        name: publish_build_info
         type: PublishBuildInfo
-        configuration:
-          inputSteps:
-            - name: docker_push
-          outputResources:
-            - name: build_info_docker_build_push
-            
-
-      - name: scan
-        type: XrayScan
-        configuration:
-          #inherits from bash
-          waitUntilFinish:         <boolean>  # default true
- 
-          inputResources:
-            - name:         build_info_docker_build_push          # required
+      - 
+        configuration: 
+          inputResources: 
+            - 
+              name: build_info_docker_build_push
               trigger: false
-        execution:
-          onStart:
-            - echo "Preparing for work..."
-          onStart:
-            - echo "Prepping build environment"
-          onSuccess:
-            - echo "Job well done!"
-          onFailure:
-            - echo "uh oh, something went wrong"
-          onComplete: #always
-            - echo "Cleaning up some stuff"
-          onCancel:
-            - echo "Someone cancelled the job"
+          waitUntilFinish: <boolean>
+        execution: 
+          onCancel: 
+            - "echo \"Someone cancelled the job\""
+          onComplete: 
+            - "echo \"Cleaning up some stuff\""
+          onFailure: 
+            - "echo \"uh oh, something went wrong\""
+          onStart: 
+            - "echo \"Prepping build environment\""
+          onSuccess: 
+            - "echo \"Job well done!\""
+        name: scan
+        type: XrayScan
