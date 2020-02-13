@@ -10,7 +10,7 @@ pipelines:
           dockerImageName: 'docker.art.local/alpine37'
           dockerImageTag: ${run_number}
           inputResources:
-            - name: myDockerRepo
+            - name: gitto
           integrations:
             - name: artimus
  
