@@ -40,7 +40,9 @@ pipelines:
               name: build_info_docker_build_push
         name: publish_build_info
         type: PublishBuildInfo
-      - 
+      
+      - name: scan
+        type: XrayScan
         configuration: 
           inputResources: 
             - 
@@ -61,5 +63,4 @@ pipelines:
             - "echo \"Prepping build environment\""
           onSuccess: 
             - "echo \"Job well done!\""
-        name: scan
-        type: XrayScan
+        
